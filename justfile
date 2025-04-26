@@ -26,6 +26,7 @@ default:
 
 # IMPORTS
 
+import 'tasks/agent.just'
 import 'tasks/check.just'
 import 'tasks/clean.just'
 import 'tasks/doc.just'
