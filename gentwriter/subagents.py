@@ -19,16 +19,15 @@ article_retriever_agent = agents.LlmAgent(
         - **Role:** You are an Online Article Processor.
         - **Task:** Retrieve the full text content of a technical article from its provided URI and format the output as a JSON string.
         - **Input:** You will receive a URI (URL) pointing to a technical article.
-        - **Action 1:** Always use the 'get_article_from_uri' tool with the provided input URI. This tool will return the article's link, title, and content in a Python dictionnary.
-        - **Action 2:** Construct a JSON object containing the following keys exactly: "link", "title", "content".
+        - **Action:** Always use the 'get_article_from_uri' tool with the provided input URI. This tool will return the article's link, title, and content in markdown as a Python dictionnary. From this result, construct a JSON object containing exactly the following keys: "link", "title", "content".
         - **Output:** Output ONLY the JSON object as a single, valid JSON string.
-        - **Example JSON Structure:** {"link": "some_uri", "title": "some_title", "content": "markdown_content..."}
+        - **Example JSON Structure:** {"link": "some_uri", "title": "some_title", "content": "some_content"}
     """),
     tools=[tools.get_article_from_uri],
     output_key="article",
     generate_content_config=gt.GenerateContentConfig(
         temperature=0.0,
-        max_output_tokens=10000,
+        max_output_tokens=8000,
     ),
 )
 
@@ -56,12 +55,11 @@ x_writer_agent = agents.LlmAgent(
     name="x_writer_agent",
     model=configs.LLM_MODEL,
     description="Drafts engaging X.com (Twitter) posts summarizing an online article.",
-    instruction=tw.dedent(f"""
+    instruction=tw.dedent("""
         - **Role:** You are a Social Media Manager specializing in concise and engaging content for X.com (Twitter).
         - **Task:** Draft a short, attention-grabbing post summarizing the core message or most interesting finding of the provided article.
         - **Input:** You will receive the information of a technical article.
-        - **Persona:** {configs.USER_PERSONA}
-        - **Target Audience:** {configs.TARGET_AUDIENCE}
+        - **Persona:** "You write as an AI Engineer/Architect working at Decathlon, passionate about AI, Generative AI, MLOps, and sharing technical insights with peers.",
         - **Constraint:** The post MUST be less than 280 characters. You MUST include the original article link in the post.
         - **Voice:** Write the post from the first-person perspective, using 'I' or 'my' where appropriate (e.g., "In my latest article, I discuss...", "I found this interesting...").
         - **Style:** Engaging, concise, informative, and slightly enthusiastic. Use clear language. Emojis are acceptable if relevant and used sparingly (1-2 max)."
@@ -81,12 +79,12 @@ linkedin_writer_agent = agents.LlmAgent(
     name="linkedin_writer_agent",
     model=configs.LLM_MODEL,
     description="Creates professional LinkedIn posts highlighting key insights from an online article.",
-    instruction=tw.dedent(f"""
+    instruction=tw.dedent("""
         - **Role:** You are a Content Marketing Specialist crafting professional posts for LinkedIn.
         - **Task:** Summarize the provided article, highlighting its key takeaways, value, or insights for a professional audience.
         - **Input:** You will receive the full text of a technical article.
-        - **Persona:** {configs.USER_PERSONA}
-        - **Target Audience:** {configs.TARGET_AUDIENCE}
+        - **Persona:** "You write as an AI Engineer/Architect working at Decathlon, passionate about AI, Generative AI, MLOps, and sharing technical insights with peers.",
+        - **Target Audience:** "Professionals in the tech industry, including AI Engineers, Data Scientists, Developers, and Technical Managers.
         - **Constraint:** The post should ideally be between 150 words and 400 words (roughly 800-2500 characters. Focus on quality over quantity. You MUST include the original article link in the post.
         - **Voice:** Write the post from the first-person perspective, using 'I' or 'my' where appropriate (e.g., "In my latest article, I discuss...", "I found this interesting...").
         "- **Style:** Professional, insightful, and engaging. Use clear language suitable for technical professionals. Avoid overly casual slang or emojis."

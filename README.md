@@ -16,6 +16,8 @@ Use the package manager [uv](https://docs.astral.sh/uv/):
 uv sync
 ```
 
+Activate Vertex AI API in Google Console
+
 # Usage
 
 ```bash
