@@ -30,4 +30,4 @@ agent-run:
 # run the agent web UI
 [group('agent')]
 agent-web:
-    uv run adk web
+    uv run adk web --reload --reload_agents

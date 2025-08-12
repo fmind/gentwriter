@@ -47,7 +47,7 @@ seo_writer_agent = agents.LlmAgent(
     output_key="seo_description",
     generate_content_config=gt.GenerateContentConfig(
         temperature=0.3,
-        max_output_tokens=100,
+        max_output_tokens=2000,
     ),
 )
 
@@ -71,7 +71,7 @@ x_writer_agent = agents.LlmAgent(
     output_key="x_post",
     generate_content_config=gt.GenerateContentConfig(
         temperature=0.3,
-        max_output_tokens=200,
+        max_output_tokens=4000,
     ),
 )
 
@@ -99,7 +99,7 @@ linkedin_writer_agent = agents.LlmAgent(
     output_key="linkedin_post",
     generate_content_config=gt.GenerateContentConfig(
         temperature=0.3,
-        max_output_tokens=1000,
+        max_output_tokens=6000,
     ),
 )
 
