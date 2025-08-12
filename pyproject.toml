@@ -13,11 +13,11 @@ license = { file = "LICENSE.txt" }
 keywords = ["agent", "adk", "writer", "data-science", "generative-ai"]
 requires-python = ">=3.13"
 dependencies = [
-    "google-adk[eval]>=0.2.0",
-    "google-genai>=1.11.0",
+    "google-adk[eval]>=1.10.0",
+    "google-genai>=1.29.0",
     "hatchling>=1.27.0",
-    "markitdown>=0.1.1",
-    "pydantic>=2.11.3",
+    "markitdown>=0.1.2",
+    "pydantic>=2.11.7",
 ]
 
 # LINKS

@@ -105,7 +105,7 @@ linkedin_writer_agent = agents.LlmAgent(
 
 parallel_writer_agent = agents.ParallelAgent(
     name="parallel_writer_agent",
-    description="A multi-agent system for generating social media content from technical articles.",
+    description="A multi-agent system for generating social media content from technical articles (SEO, X.com, and LinkedIn).",
     sub_agents=[
         seo_writer_agent,
         x_writer_agent,
@@ -117,7 +117,7 @@ workflow_agent = agents.SequentialAgent(
     name="workflow_agent",
     description=tw.dedent("""
         A multi-agent system for generating social media content from technical articles.",
-        It first retrieves the article content, then generates SEO, X.com, and LinkedIn posts."
+        It first retrieves the article content, then generates SEO, X.com, and LinkedIn posts using the parallel_writer_agent."
         """),
     sub_agents=[
         article_retriever_agent,
