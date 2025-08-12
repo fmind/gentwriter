@@ -5,7 +5,7 @@
 
 [project]
 name = "gentwriter"
-version = "1.0.0"
+version = "2.0.0"
 description = "Write social network content like a true a-gent writer."
 authors = [{ name = "fmind" }]
 readme = "README.md"
